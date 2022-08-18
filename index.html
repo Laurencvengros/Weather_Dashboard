@@ -20,24 +20,32 @@
         <main class="container">
             <section class="row">
                 <div class="col-12 col-md-3">
-                    <form class="container">
-                        <div>
-                            <label></label>Search For A City</label>
-                                <input type="text" id="searchCities" placeholder="City"></input>
-                                <button id="searchBtn">Search</button>
+                    <div class="card ">
+                        <div class="card-header">
+                            <h5>Search For A City</h5>
+                                <form class="form-inline">
+                                    <input class="form-control" id="searchCities" placeholder="City"></input>
+                                    <button id="searchBtn">Search</button>
+                                </form>
+                                <div>
+                                    <ul id="list-of-cities">
+                                        
+                                    </ul>
+                                </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class= "col 12 med-9">
-                    <div id="todayforecast">
+                    <div class="row" id="todayforecast">
                         <p>PLACEHOLDER Lorem ipsum dolor sit, amet consectetur adipisicing elit. A deleniti illo amet veniam. Enim dignissimos sint,
                         modi voluptate libero corporis ipsa consectetur commodi dolorum dolores vitae? Odit perspiciatis iure placeat.
                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam, neque ab doloremque, harum corporis
                         voluptas explicabo amet culpa, odit autem totam itaque voluptatibus ipsa quos aperiam eius vel? Commodi,
                         nesciunt.</p>
                     </div>
-                    <div id="futureforecast">
-                        <p>PLACEHOLDER</p>
+                    <div class="row" id="futureforecast">
+                        <div class="card-deck w-100">
+                        </div>
 
                     </div>
                 </div>
