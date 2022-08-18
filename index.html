@@ -3,27 +3,48 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Coding Quiz</title>
-        <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-        <link rel="stylesheet" href="./assets/css/style.css"></link>
+        <title>Weather Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+        <link rel="stylesheet" href="./assets/css/style.css"/>
     </head>
     <body >
+        <header class="jumbotron jumbotron-fluid bg-dark">
+            <div class="container">
+                <div class="col-12 text-center text-light">
+                    <h1>Weather Dashboard</h1>
+                </div>
+            </div>
+        </header>
+        
+        <main class="container">
+            <section class="row">
+                <div class="col-12 col-md-3">
+                    <form class="container">
+                        <div>
+                            <label></label>Search For A City</label>
+                                <input type="text" id="searchCities" placeholder="City"></input>
+                                <button id="searchBtn">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div class= "col 12 med-9">
+                    <div id="todayforecast">
+                        <p>PLACEHOLDER Lorem ipsum dolor sit, amet consectetur adipisicing elit. A deleniti illo amet veniam. Enim dignissimos sint,
+                        modi voluptate libero corporis ipsa consectetur commodi dolorum dolores vitae? Odit perspiciatis iure placeat.
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam, neque ab doloremque, harum corporis
+                        voluptas explicabo amet culpa, odit autem totam itaque voluptatibus ipsa quos aperiam eius vel? Commodi,
+                        nesciunt.</p>
+                    </div>
+                    <div id="futureforecast">
+                        <p>PLACEHOLDER</p>
 
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+                    </div>
+                </div>
+            </section>
+        </main>
+            
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="assets/js/script.js"></script>
