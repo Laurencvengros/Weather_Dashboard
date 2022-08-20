@@ -1,14 +1,15 @@
 var APIkey = "3ab800fa705dfe5653a465d8d9a9d6ae";
 var citiesLi = [];
+var currentCity;
+
 
 var tableBody = document.getElementById('list-of-cities');
-
+var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi")) ||[];
 
 
 
 
 $(document).ready(function(){
-var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi"));
 
 if(citiesLi !== null){
     citiesLi = citySearchHistory || [];
@@ -50,9 +51,14 @@ fetch(APIurl)
 console.log(city);
 
 var currentConditions = $("#todayforecast");
-var cityName = $('<h2>');
-cityName.text(city);
-currentConditions.append(cityName);
+var cityEl = $('<h2>');
+cityEl.text(city);
+currentConditions.append(cityEl);
+
+currentDate = moment.unix(data.dt).format("l");
+dateEl = $("<h3>").text(currentDate.toString());
+console.log(dateEl);
+currentConditions.append(dateEl);
 
 
 }
@@ -60,19 +66,17 @@ currentConditions.append(cityName);
 )};
 
 function showCity(){
-    if(citiesLi){
-
+    var storedCities = JSON.parse(localStorage.getItem("citiesLi")) || [];
     var ulEl = document.createElement("ul");
     ulEl.classList.add("list-unstyled");
     ulEl.classList.add("w-100");
 
-    for(var i = 0; i < citiesLi.length; i++){
+    for(var i = 0; i < storedCities.length; i++){
         
         var liEl = document.createElement("li");
         liEl.innerHTML = "<button type='button' class='list-group-item list-group-item-action' attr='"+citiesLi[i]+"'>" + citiesLi[i] + "</button>";
         ulEl.appendChild(liEl);
     }
         tableBody.appendChild(ulEl); 
-
-    }
+    
 };
