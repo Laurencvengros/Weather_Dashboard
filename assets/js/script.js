@@ -1,12 +1,12 @@
 var APIkey = "3ab800fa705dfe5653a465d8d9a9d6ae";
-citiesLi = [];
+var citiesLi = [];
 
 
 $(document).ready(function(){
 var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi"));
 
 if (citiesLi !== null){
-    citiesLi = citySearchHistory
+    citiesLi = citySearchHistory || [];
 }
 
 });
@@ -25,8 +25,13 @@ function storedCities(){
 $("#searchBtn").on("click", function(event){
 event.preventDefault();
 city = $("#searchCities").val();
+citiesLi.push(city);
+
+
+
+
 getWeather();
-storedCities()
+storedCities();
     
 })
 
@@ -38,9 +43,15 @@ var APIurl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APP
 fetch(APIurl)
 .then(function(response){
     return response.json();
+    
 })
-.then(function(response){
+.then(function(data){
 console.log(currentCity);
+
+var currentConditions = $("#todayforecast");
+var cityName = $('<h2>');
+cityName.text(currentCity);
+currentConditions.append(cityName);
 }
 
 )};
