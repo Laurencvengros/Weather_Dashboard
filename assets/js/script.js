@@ -67,6 +67,13 @@ var conditionsIconEl = $("<img>");
 conditionsIconEl.attr("src", "http://openweathermap.org/img/w/"+ conditionsIcon + ".png");
 currentConditions.append(conditionsIconEl);
 
+ConditionsTemp = $("#temp");
+var temp = data.main.temp;
+var tempF = ((temp - 273.15) * 1.80 + 32).toFixed(1);
+var tempEl = $("<p>");
+tempEl.text(tempF + " ºF");
+currentConditions.append( tempEl);
+
 
 }
 
