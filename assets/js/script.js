@@ -1,15 +1,23 @@
 var APIkey = "3ab800fa705dfe5653a465d8d9a9d6ae";
 var citiesLi = [];
+city = "";
+
+var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi"));
+
+if (citySearchHistory !== null){
+    citySearchHistory.forEach(function(city) {city.toUpperCase();});
+    citiesLi =citySearchHistory;
 
 
 $(document).ready(function(){
-var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi"));
-
-if (citiesLi !== null){
-    citiesLi = citySearchHistory || [];
+showCity(citiesLi);
+if(citySearchHistory !== null){
+    lastSearchedCity = citiesLi[0];
+    getWeather(lastSearchedCity);
+}
 }
 
-});
+)};
 
 function storedCities(){
     localStorage.setItem("citiesLi", JSON.stringify(citiesLi));
@@ -52,6 +60,18 @@ var currentConditions = $("#todayforecast");
 var cityName = $('<h2>');
 cityName.text(currentCity);
 currentConditions.append(cityName);
+
+
 }
 
 )};
+
+function showCity(listCities){
+    var count = 0;
+    listCities.length > 5 ? count = 5 : count = listCities.length
+    for(var i = 0; i < count; i++){
+        $("#list-of-cities").append(`<a href="#" class="list-group-item" style="text-decoration: none; color: black;">
+        <li>${listCities[i]}</li>
+        </a>`);
+    }
+}
