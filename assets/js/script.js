@@ -32,8 +32,9 @@ function storedCities(){
 
 $("#searchBtn").on("click", function(event){
 event.preventDefault();
-city = $("#searchCities").val();
-citiesLi.push(city);
+cityName = $("input").val().trim();
+$("#searchCities").val("");
+getWeather(cityName);
 
 
 
@@ -44,8 +45,7 @@ storedCities();
 })
 
 
-function getWeather(){
-currentCity = $("#searchCities").val();
+function getWeather(cityName){
 
 var APIurl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + APIkey;
 fetch(APIurl)
@@ -54,12 +54,12 @@ fetch(APIurl)
     
 })
 .then(function(data){
-console.log(currentCity);
+console.log(city);
 
 var currentConditions = $("#todayforecast");
 var cityName = $('<h2>');
-cityName.text(currentCity);
-currentConditions.append(cityName);
+cityName.text(cityName);
+currentConditions.append(city);
 
 
 }
