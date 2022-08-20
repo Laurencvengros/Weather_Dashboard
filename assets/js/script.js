@@ -1,6 +1,8 @@
 var APIkey = "3ab800fa705dfe5653a465d8d9a9d6ae";
 var citiesLi = [];
 
+var tableBody = document.getElementById('list-of-cities');
+
 
 
 
@@ -58,12 +60,19 @@ currentConditions.append(cityName);
 )};
 
 function showCity(){
-    var count = 0;
-    if(citiesLi.length > 5 ? count = 5 : count = citiesLi.length){
-    for(var i = 0; i < count; i++){
-        $("#list-of-cities").append(`<a href="#" style="text-decoration: none; color: black;">
-        <li>${citiesLi[i]}</li>
-        </a>`);
+    if(citiesLi){
+
+    var ulEl = document.createElement("ul");
+    ulEl.classList.add("list-unstyled");
+    ulEl.classList.add("w-100");
+
+    for(var i = 0; i < citiesLi.length; i++){
+        
+        var liEl = document.createElement("li");
+        liEl.innerHTML = "<button type='button' class='list-group-item list-group-item-action' attr='"+citiesLi[i]+"'>" + citiesLi[i] + "</button>";
+        ulEl.appendChild(liEl);
     }
+        tableBody.appendChild(ulEl); 
+
     }
-}
+};
