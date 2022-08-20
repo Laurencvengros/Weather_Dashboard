@@ -27,6 +27,7 @@ function storedCities(){
 $("#searchBtn").on("click", function(event){
 event.preventDefault();
 city = $("#searchCities").val();
+citiesLi = [];
 citiesLi.push(city);
 
 
@@ -53,12 +54,18 @@ console.log(city);
 var currentConditions = $("#todayforecast");
 var cityEl = $('<h2>');
 cityEl.text(city);
+currentConditions.empty();
 currentConditions.append(cityEl);
 
 currentDate = moment.unix(data.dt).format("l");
 dateEl = $("<h3>").text(currentDate.toString());
 console.log(dateEl);
 currentConditions.append(dateEl);
+
+var conditionsIcon = data.weather[0].icon;
+var conditionsIconEl = $("<img>");
+conditionsIconEl.attr("src", "http://openweathermap.org/img/w/"+ conditionsIcon + ".png");
+currentConditions.append(conditionsIconEl);
 
 
 }
