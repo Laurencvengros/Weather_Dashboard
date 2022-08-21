@@ -4,7 +4,8 @@ var currentCity;
 
 
 var tableBody = document.getElementById('list-of-cities');
-var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi")) ||[];
+var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi")) || [];
+
 
 
 
@@ -52,27 +53,53 @@ fetch(APIurl)
 console.log(city);
 
 var currentConditions = $("#todayforecast");
+var header = $("<div class='container'>");
+var weatherDiv = $("<div class='container'>");
+
+
+
 var cityEl = $('<h2>');
 cityEl.text(city);
 currentConditions.empty();
-currentConditions.append(cityEl);
+;
+
 
 currentDate = moment.unix(data.dt).format("l");
 dateEl = $("<h3>").text(currentDate.toString());
 console.log(dateEl);
-currentConditions.append(dateEl);
+
 
 var conditionsIcon = data.weather[0].icon;
-var conditionsIconEl = $("<img>");
-conditionsIconEl.attr("src", "http://openweathermap.org/img/w/"+ conditionsIcon + ".png");
-currentConditions.append(conditionsIconEl);
+conditionsIconEl = "http://openweathermap.org/img/w/"+ conditionsIcon + ".png";
+console.log(conditionsIconEl);
+var weatherIcon = $("<img>").attr('src', conditionsIconEl);
+var headerText = $("<h3>").text(city + " " + currentDate.toString() + conditionsIcon);
+headerText.append(weatherIcon);
+header.append(headerText);
+$("#todayforecast").append(header);
 
-ConditionsTemp = $("#temp");
+
 var temp = data.main.temp;
 var tempF = ((temp - 273.15) * 1.80 + 32).toFixed(1);
-var tempEl = $("<p>");
-tempEl.text(tempF + " ºF");
-currentConditions.append( tempEl);
+var tempEl = $("<p>").text("Temperature: " + tempF + " F ");
+weatherDiv.append(tempEl)
+$("#todayforecast").append(weatherDiv);
+console.log(tempEl);
+
+
+
+var humidity = data.main.humidity;
+var humidityEl = $("<p>").text("Humidity: " + humidity + " % ");
+weatherDiv.append(humidityEl);
+$("#todayforecast").append(weatherDiv);
+console.log(humidity);
+
+var windSpeed = data.wind.speed;
+var windSpeedEl = $("<p>").text("Wind Speed: " + windSpeed + " MPH ");
+weatherDiv.append(windSpeedEl);
+$("#todayforecast").append(weatherDiv);
+console.log(windSpeedEl);
+
 
 
 }
