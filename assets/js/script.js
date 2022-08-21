@@ -51,6 +51,7 @@ var cityEl = $('<h2>');
 cityEl.text(city);
 currentConditions.empty();
 
+
 dateEl = $("<h3>").text(currentDate.toString());
 console.log(dateEl);
 
@@ -75,9 +76,9 @@ weatherDiv.append(windSpeedEl);
 $("#todayforecast").append(weatherDiv);
 console.log(windSpeedEl);
 
-var uvEl = $("<div>").text(uvIndex);
+var uvEl = $("<div>").text(uvIndex)
 weatherDiv.append(uvEl);
-$("#todayforecast").append(weatherDiv);
+$("#todayforecast").append( weatherDiv );
 console.log(uvEl);
 
 
@@ -128,7 +129,20 @@ fetch(APIurl)
 })
 .then(function(data){
 uvIndex = data.value;
-    showWeather();
+
+
+if(uvIndex <= 2){
+   $("#todayforecast").addClass("low");
+}else if((uvIndex > 2) && (uvIndex <= 5)){
+    $("#todayforecast").addClass("moderate");
+}else if((uvIndex > 5) && (uvIndex <= 7)){
+    $("#todayforecast").addClass("high");
+}else if (uvIndex >=8){
+    $("#todayforecast").addClass("extreme");
+}
+
+showWeather();
 }
 )}
 )};
+

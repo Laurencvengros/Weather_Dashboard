@@ -1,0 +1,23 @@
+.low{
+    background-color: green;
+    border-radius: 5px;
+    color: white;
+}
+
+.moderate{
+    background-color: yellow;
+    border-radius: 5px;
+    color: white;
+}
+
+.high{
+    background-color: orange;
+    border-radius: 5px;
+    color: white;
+}
+
+.extreme{
+    background-color: red;
+    border-radius: 5px;
+    color: white;
+}
