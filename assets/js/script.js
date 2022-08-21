@@ -32,7 +32,7 @@ citiesLi = [];
 citiesLi.push(city);
 
 
-
+GetFutureConditions();
 getWeather();
 storedCities();
 showCity();
@@ -130,7 +130,7 @@ fetch(APIurl)
 .then(function(data){
 uvIndex = data.value;
 
-
+//UV index classes based on actual 
 if(uvIndex <= 2){
    $("#todayforecast").addClass("low");
 }else if((uvIndex > 2) && (uvIndex <= 5)){
@@ -145,4 +145,41 @@ showWeather();
 }
 )}
 )};
+
+function GetFutureConditions(){
+ city = $("#searchCities").val();
+ 
+
+    var fiveDayAPI = "https://api.openweathermap.org/data/2.5/forecast?q=" + city +  "&APPID=" + APIkey;
+    fetch(fiveDayAPI)
+    .then(function(response){
+    return response.json();
+})
+.then(function(data){
+    city = $("#searchCities").val();
+    var fiveDayForecast = data.list;
+
+    for (let i = 0; i < fiveDayForecast.length; i++) {
+        futureDate = moment.unix(fiveDayForecast[i].dt).format("l");
+        futureConditionsIcon = fiveDayForecast[i].icon;
+        futureConditionsIconEl = "http://openweathermap.org/img/w/"+ futureConditionsIcon + ".png";
+        futureHumidity = fiveDayForecast[i].humidity;
+        var futureTempVal = fiveDayForecast[i].main.temp;
+        tempF = ((futureTempVal - 273.15) * 1.80 + 32).toFixed(1);
+    }
+
+showFutureConditions();
+
+})
+};
+
+
+function showFutureConditions(){
+    //var futureConditions = $("#futureforecast");
+    
+    var cityEl = $('<h2>');
+    cityEl.text(city);
+    //futureConditions.empty();
+
+}
 
