@@ -116,29 +116,41 @@ function GetFutureConditions(){
     var fiveDayForecast = data.list;
    
 
-    for (let i = 0; i < fiveDayForecast.length; i++) {
-        futureDate = moment.unix(fiveDayForecast[i].dt).format("l");
+    for (let i = 0; i < 5; i++) {
+        futureDate = moment().add(i, 'days').format("l");
         futureConditionsIcon =  data.list[i].weather[0].icon;
         futureConditionsIconEl = "http://openweathermap.org/img/w/"+ futureConditionsIcon + ".png";
         futureHumidity = fiveDayForecast[i].main.humidity;
         var futureTempVal = fiveDayForecast[i].main.temp;
         tempF = ((futureTempVal - 273.15) * 1.80 + 32).toFixed(1);
-    }
 
 
-    FutureHeader = $("<h4>").text("Five Day Forecast:").attr("id", "card-deck-title");
-    FutureHeader.addClass("pt-4 pt-2");
-    $(".card-deck").before(FutureHeader);
 
     var card = $("<div class='card'>").addClass("pl-1 bg-primary text-light");
     var cardDiv = $("<div>").attr("class", "card-block");
     var TitleHeader = $("<h6>").text(futureDate).addClass("pt-2");
     var TitleDiv = $("<div>").attr("class", "card-block");
+    var TextDiv = $("<div>").attr("class", "card-text");
+    var imgEl = $("<img>").attr("src", futureConditionsIconEl);  
+    var TempEl = $("<p>").text("Temp: " + tempF + " ºF").css("font-size", "10px");
+    var WindEl = $("<p>").text("Wind: " + futureWindSpeed + "%").css("font-size", "10px");
+    
     
     TitleDiv.append(TitleHeader);
     cardDiv.append(TitleDiv);
+    TextDiv.append(imgEl);
+    TextDiv.append(TempEl);
+    TextDiv.append(WindEl);
     card.append(cardDiv);
+    cardDiv.append(TextDiv);
     $(".card-deck").append(card);
+
+
+    FutureHeader = $("<h4>").text("Five Day Forecast:").attr("id", "card-deck-title");
+    FutureHeader.addClass("futureforecast");
+    $(".card-deck").before(FutureHeader);
+}
+
 
   }
     
