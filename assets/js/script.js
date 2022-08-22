@@ -32,12 +32,18 @@ citiesLi = [];
 citiesLi.push(city);
 
 
-
+clearData();
 getWeather();
 storedCities();
 showCity();
+
     
 })
+
+function clearData(){
+    $(".card-deck").empty();
+   
+};
 
 
 function showCity(){
@@ -123,6 +129,7 @@ function GetFutureConditions(){
         futureHumidity = fiveDayForecast[i].main.humidity;
         var futureTempVal = fiveDayForecast[i].main.temp;
         tempF = ((futureTempVal - 273.15) * 1.80 + 32).toFixed(1);
+        futureWindSpeed = fiveDayForecast[i].wind.speed;
 
 
 
@@ -134,24 +141,26 @@ function GetFutureConditions(){
     var imgEl = $("<img>").attr("src", futureConditionsIconEl);  
     var TempEl = $("<p>").text("Temp: " + tempF + " ºF").css("font-size", "10px");
     var WindEl = $("<p>").text("Wind: " + futureWindSpeed + "%").css("font-size", "10px");
-    
+    var HumidityEl = $("<p>").text("Humidity: " + futureHumidity + "%").css("font-size", "10px");
+
     
     TitleDiv.append(TitleHeader);
     cardDiv.append(TitleDiv);
     TextDiv.append(imgEl);
     TextDiv.append(TempEl);
     TextDiv.append(WindEl);
+    TextDiv.append(HumidityEl);
     card.append(cardDiv);
     cardDiv.append(TextDiv);
     $(".card-deck").append(card);
 
 
-    FutureHeader = $("<h4>").text("Five Day Forecast:").attr("id", "card-deck-title");
-    FutureHeader.addClass("futureforecast");
-    $(".card-deck").before(FutureHeader);
+  
 }
 
-
+FutureHeader = $("<h4>").text("Five Day Forecast:").attr("id", "card-deck-title");
+FutureHeader.addClass("futureforecast");
+$(".card-deck").before(FutureHeader);
   }
     
 )};
