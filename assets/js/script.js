@@ -9,26 +9,35 @@ var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi")) || [];
 
 
 
-
 $(document).ready(function(){
-
-if(citiesLi !== null){
-    citiesLi = citySearchHistory || [];
+    
+if(citySearchHistory !== null){
+   citiesLi = citySearchHistory || [];
+  } 
   
-}
 });
+
 
 function storedCities(){
     localStorage.setItem("citiesLi", JSON.stringify(citiesLi));
     console.log(localStorage);
 
-}
+};
+  
+function clearData(){
+    $(".card-deck").empty();
+    $(".header").empty();
+    $("#todayforecast").empty();
+    $('#list-of-cities').empty();
+   
+};
+
 
 
 $("#searchBtn").on("click", function(event){
 event.preventDefault();
 city = $("#searchCities").val();
-citiesLi = [];
+//citiesLi = [];
 citiesLi.push(city);
 
 
@@ -38,12 +47,7 @@ storedCities();
 showCity();
 
     
-})
-
-function clearData(){
-    $(".card-deck").empty();
-   
-};
+});
 
 
 function showCity(){
@@ -53,13 +57,15 @@ function showCity(){
     ulEl.classList.add("w-100");
 
     for(var i = 0; i < storedCities.length; i++){
-        
+       
         var liEl = document.createElement("li");
-        liEl.innerHTML = "<button type='button' class='list-group-item list-group-item-action' attr='"+citiesLi[i]+"'>" + citiesLi[i] + "</button>";
+        liEl.innerHTML = "<button type='button' class='list-group-item list-group-item-action' attr='"+storedCities[i]+"'>" + storedCities [i] + "</button>";
         ulEl.appendChild(liEl);
+        
     }
         tableBody.appendChild(ulEl); 
-    
+        
+        
 };
 
 function getWeather(){
@@ -91,14 +97,14 @@ fetch(APIurl)
 .then(function(data){
 uvIndex = data.value;
 
-//UV index classes based on actual 
+
 if(uvIndex <= 2){
    $("#todayforecast").addClass("low");
 }else if((uvIndex > 2) && (uvIndex <= 5)){
     $("#todayforecast").addClass("moderate");
-}else if((uvIndex > 5) && (uvIndex <= 7)){
+}else if((uvIndex > 5) && (uvIndex <= 8)){
     $("#todayforecast").addClass("high");
-}else if (uvIndex >=8){
+}else if (uvIndex >=9){
     $("#todayforecast").addClass("extreme");
 }
 
@@ -133,7 +139,7 @@ function GetFutureConditions(){
 
 
 
-    var card = $("<div class='card'>").addClass("pl-1 bg-primary text-light");
+    var card = $("<div class='card'>").addClass("forecast");
     var cardDiv = $("<div>").attr("class", "card-block");
     var TitleHeader = $("<h6>").text(futureDate).addClass("pt-2");
     var TitleDiv = $("<div>").attr("class", "card-block");
@@ -160,7 +166,7 @@ function GetFutureConditions(){
 
 FutureHeader = $("<h4>").text("Five Day Forecast:").attr("id", "card-deck-title");
 FutureHeader.addClass("futureforecast");
-$(".card-deck").before(FutureHeader);
+$(".header").append(FutureHeader);
   }
     
 )};
@@ -170,8 +176,8 @@ function showWeather(){
     console.log(city);
     
     var currentConditions = $("#todayforecast");
-    var header = $("<div class='container'>");
-    var weatherDiv = $("<div class='container'>");
+    var header = $("<div class='container'>").addClass("conditions");
+    var weatherDiv = $("<div class='container'>").addClass("conditions");
     
     var cityEl = $('<h2>');
     cityEl.text(city);

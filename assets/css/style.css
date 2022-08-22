@@ -27,3 +27,15 @@
     margin-bottom: 10px;
     font-size: 40px;
 }
+
+.forecast{
+    background-color: gray;
+    color:black;
+    border: 2px solid black;
+    text-align:center;
+    padding: 5px;
+}
+
+.conditions{
+    color:black;
+}

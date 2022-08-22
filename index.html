@@ -22,12 +22,16 @@
                 <div class="col-12 col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Search For A City</h5>
-                                <form class="form-inline">
-                                    <input class="form-control" id="searchCities" placeholder="City"></input>
-                                    <button id="searchBtn">Search</button>
-                                </form>
-                                <div id= "list-of-cities"></div>
+                            <label><h5>Search For A City</h5></label>
+                                
+                                    <form class="form-inline">
+                                        <input class="form-control" id="searchCities" placeholder="City"></input>
+                                        <div class="input-group-append">
+                                            <button id="searchBtn">Search</button>
+                                        </div>
+                                    </form>
+                                    <h5>Recently Searched:</h5>
+                                    <div id= "list-of-cities"></div>
                         </div>
                     </div>
                 </div>
@@ -36,6 +40,7 @@
                         
                     
                     <h2 class="row" id="futureforecast"> 
+                        <div class="header"></div>
                         <div class="card-deck w-100">
                         </div>
 
