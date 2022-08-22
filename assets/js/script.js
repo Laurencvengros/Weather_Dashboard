@@ -114,6 +114,7 @@ function GetFutureConditions(){
 .then(function(data){
     city = $("#searchCities").val();
     var fiveDayForecast = data.list;
+   
 
     for (let i = 0; i < fiveDayForecast.length; i++) {
         futureDate = moment.unix(fiveDayForecast[i].dt).format("l");
@@ -123,28 +124,24 @@ function GetFutureConditions(){
         var futureTempVal = fiveDayForecast[i].main.temp;
         tempF = ((futureTempVal - 273.15) * 1.80 + 32).toFixed(1);
     }
-    var futureConditions = $("#futureforecast");
-    futureConditions.empty();
-    var futureWeatherDiv = $("<div class='container border bg-light'>");
-    
-    dateEl = $("<h6>").text(futureDate.toString());
-    futureWeatherDiv.append(dateEl);
-    $("#futureforecast").append(futureWeatherDiv);
 
-    imgEl = $("<img>").attr("src", futureConditionsIconEl);  
-    futureWeatherDiv.append(imgEl);
-    $("#futureforecast").append(futureWeatherDiv);
 
-    var tempEl = $("<p>").text("Temperature: " + tempF + " F ");
-    futureWeatherDiv.append(tempEl)
-    $("#futureforecast").append(futureWeatherDiv);
+    FutureHeader = $("<h4>").text("Five Day Forecast:").attr("id", "card-deck-title");
+    FutureHeader.addClass("pt-4 pt-2");
+    $(".card-deck").before(FutureHeader);
 
+    var card = $("<div class='card'>").addClass("pl-1 bg-primary text-light");
+    var cardDiv = $("<div>").attr("class", "card-block");
+    var TitleHeader = $("<h6>").text(futureDate).addClass("pt-2");
+    var TitleDiv = $("<div>").attr("class", "card-block");
     
-    var humidityEl = $("<p>").text("Humidity: " + futureHumidity + " % ");
-    futureWeatherDiv.append(humidityEl);
-    $("#futureforecast").append(futureWeatherDiv);
+    TitleDiv.append(TitleHeader);
+    cardDiv.append(TitleDiv);
+    card.append(cardDiv);
+    $(".card-deck").append(card);
+
+  }
     
-    }
 )};
 
 
@@ -188,5 +185,7 @@ function showWeather(){
     weatherDiv.append(uvEl);
     $("#todayforecast").append( weatherDiv );
     console.log(uvEl);
+
+    
 };
 
