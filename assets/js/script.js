@@ -32,58 +32,13 @@ citiesLi = [];
 citiesLi.push(city);
 
 
-GetFutureConditions();
+
 getWeather();
 storedCities();
 showCity();
     
 })
 
-
-function showWeather(){
-console.log(city);
-
-var currentConditions = $("#todayforecast");
-var header = $("<div class='container'>");
-var weatherDiv = $("<div class='container'>");
-
-var cityEl = $('<h2>');
-cityEl.text(city);
-currentConditions.empty();
-
-
-dateEl = $("<h3>").text(currentDate.toString());
-console.log(dateEl);
-
-var weatherIcon = $("<img>").attr('src', conditionsIconEl);
-var headerText = $("<h3>").text(city + " " + currentDate.toString());
-headerText.append(weatherIcon);
-header.append(headerText);
-$("#todayforecast").append(header);
-
-var tempEl = $("<p>").text("Temperature: " + tempF + " F ");
-weatherDiv.append(tempEl)
-$("#todayforecast").append(weatherDiv);
-console.log(tempEl);
-
-var humidityEl = $("<p>").text("Humidity: " + humidityVal + " % ");
-weatherDiv.append(humidityEl);
-$("#todayforecast").append(weatherDiv);
-
-
-var windSpeedEl = $("<p>").text("Wind Speed: " + windSpeed + " MPH ");
-weatherDiv.append(windSpeedEl);
-$("#todayforecast").append(weatherDiv);
-console.log(windSpeedEl);
-
-var uvEl = $("<div>").text(uvIndex)
-weatherDiv.append(uvEl);
-$("#todayforecast").append( weatherDiv );
-console.log(uvEl);
-
-
-
-};
 
 function showCity(){
     var storedCities = JSON.parse(localStorage.getItem("citiesLi")) || [];
@@ -142,6 +97,7 @@ if(uvIndex <= 2){
 }
 
 showWeather();
+GetFutureConditions();
 }
 )}
 )};
@@ -161,25 +117,76 @@ function GetFutureConditions(){
 
     for (let i = 0; i < fiveDayForecast.length; i++) {
         futureDate = moment.unix(fiveDayForecast[i].dt).format("l");
-        futureConditionsIcon = fiveDayForecast[i].icon;
+        futureConditionsIcon =  data.list[i].weather[0].icon;
         futureConditionsIconEl = "http://openweathermap.org/img/w/"+ futureConditionsIcon + ".png";
-        futureHumidity = fiveDayForecast[i].humidity;
+        futureHumidity = fiveDayForecast[i].main.humidity;
         var futureTempVal = fiveDayForecast[i].main.temp;
         tempF = ((futureTempVal - 273.15) * 1.80 + 32).toFixed(1);
     }
+    var futureConditions = $("#futureforecast");
+    futureConditions.empty();
+    var futureWeatherDiv = $("<div class='container border bg-light'>");
+    
+    dateEl = $("<h6>").text(futureDate.toString());
+    futureWeatherDiv.append(dateEl);
+    $("#futureforecast").append(futureWeatherDiv);
 
-showFutureConditions();
+    imgEl = $("<img>").attr("src", futureConditionsIconEl);  
+    futureWeatherDiv.append(imgEl);
+    $("#futureforecast").append(futureWeatherDiv);
 
-})
-};
+    var tempEl = $("<p>").text("Temperature: " + tempF + " F ");
+    futureWeatherDiv.append(tempEl)
+    $("#futureforecast").append(futureWeatherDiv);
+
+    
+    var humidityEl = $("<p>").text("Humidity: " + futureHumidity + " % ");
+    futureWeatherDiv.append(humidityEl);
+    $("#futureforecast").append(futureWeatherDiv);
+    
+    }
+)};
 
 
-function showFutureConditions(){
-    //var futureConditions = $("#futureforecast");
+function showWeather(){
+    console.log(city);
+    
+    var currentConditions = $("#todayforecast");
+    var header = $("<div class='container'>");
+    var weatherDiv = $("<div class='container'>");
     
     var cityEl = $('<h2>');
     cityEl.text(city);
-    //futureConditions.empty();
-
-}
+    currentConditions.empty();
+    
+    
+    dateEl = $("<h3>").text(currentDate.toString());
+    console.log(dateEl);
+    
+    var weatherIcon = $("<img>").attr('src', conditionsIconEl);
+    var headerText = $("<h3>").text(city + " " + currentDate.toString());
+    headerText.append(weatherIcon);
+    header.append(headerText);
+    $("#todayforecast").append(header);
+    
+    var tempEl = $("<p>").text("Temperature: " + tempF + " F ");
+    weatherDiv.append(tempEl)
+    $("#todayforecast").append(weatherDiv);
+    console.log(tempEl);
+    
+    var humidityEl = $("<p>").text("Humidity: " + humidityVal + " % ");
+    weatherDiv.append(humidityEl);
+    $("#todayforecast").append(weatherDiv);
+    
+    
+    var windSpeedEl = $("<p>").text("Wind Speed: " + windSpeed + " MPH ");
+    weatherDiv.append(windSpeedEl);
+    $("#todayforecast").append(weatherDiv);
+    console.log(windSpeedEl);
+    
+    var uvEl = $("<div>").text(uvIndex)
+    weatherDiv.append(uvEl);
+    $("#todayforecast").append( weatherDiv );
+    console.log(uvEl);
+};
 
