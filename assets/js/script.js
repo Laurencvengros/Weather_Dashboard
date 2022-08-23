@@ -1,6 +1,6 @@
 var APIkey = "3ab800fa705dfe5653a465d8d9a9d6ae";
 var citiesLi = [];
-var currentCity;
+var city = "Austin";
 
 
 var tableBody = document.getElementById('list-of-cities');
@@ -14,7 +14,10 @@ $(document).ready(function(){
     if(citySearchHistory !== null){
     citiesLi = citySearchHistory || [];
     }; 
-    showCity();
+  
+showCity();
+getWeather(city);
+
    
     
 });
@@ -65,6 +68,10 @@ $("body").delegate(".list-group-item", "click", function() {
     
     
     
+});
+
+$(".clearBtn").on("click", function(){
+    localStorage.clear();
 });
 
 function showCity(){
@@ -227,9 +234,9 @@ function showWeather(){
     $("#todayforecast").append(weatherDiv);
     console.log(windSpeedEl);
     
-    var uvEl = $("<div>").text(uvIndex)
+    var uvEl = $("<div>").text("UV Index: " + uvIndex)
     weatherDiv.append(uvEl);
-    $("#todayforecast").append( weatherDiv );
+    $("#uvindex").append( weatherDiv );
     console.log(uvEl);
 
     

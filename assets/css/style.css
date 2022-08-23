@@ -39,3 +39,15 @@
 .conditions{
     color:black;
 }
+
+.clearBtn:hover{
+    background-color: grey;
+}
+
+#searchBtn:hover{
+    background-color: grey;
+}
+
+#searchBtn{
+    height: 38px;
+}
