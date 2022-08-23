@@ -9,12 +9,14 @@ var citySearchHistory = JSON.parse(localStorage.getItem("citiesLi")) || [];
 
 
 
-$(document).ready(function(){
+$(document).ready(function(){ 
+    console.log(citySearchHistory);
+    if(citySearchHistory !== null){
+    citiesLi = citySearchHistory || [];
+    }; 
+    showCity();
+   
     
-if(citySearchHistory !== null){
-   citiesLi = citySearchHistory || [];
-  } 
-  
 });
 
 
@@ -32,12 +34,18 @@ function clearData(){
    
 };
 
+function clearForecast(){
+    $(".card-deck").empty();
+    $(".header").empty();
+    $("#todayforecast").empty();
+}
+
 
 
 $("#searchBtn").on("click", function(event){
 event.preventDefault();
 city = $("#searchCities").val();
-//citiesLi = [];
+
 citiesLi.push(city);
 
 
@@ -49,6 +57,15 @@ showCity();
     
 });
 
+$("body").delegate(".list-group-item", "click", function() {
+    clearForecast();
+    console.log($(this).text());
+    city = $(this).text();
+    getWeather();
+    
+    
+    
+});
 
 function showCity(){
     var storedCities = JSON.parse(localStorage.getItem("citiesLi")) || [];
@@ -115,7 +132,7 @@ GetFutureConditions();
 )};
 
 function GetFutureConditions(){
- city = $("#searchCities").val();
+ //city = $("#searchCities").val();
  
 
     var fiveDayAPI = "https://api.openweathermap.org/data/2.5/forecast?q=" + city +  "&APPID=" + APIkey;
@@ -130,6 +147,8 @@ function GetFutureConditions(){
 
     for (let i = 0; i < 5; i++) {
         futureDate = moment().add(i, 'days').format("l");
+        console.log(data);
+        console.log(data.list[i].weather[0].icon);
         futureConditionsIcon =  data.list[i].weather[0].icon;
         futureConditionsIconEl = "http://openweathermap.org/img/w/"+ futureConditionsIcon + ".png";
         futureHumidity = fiveDayForecast[i].main.humidity;
