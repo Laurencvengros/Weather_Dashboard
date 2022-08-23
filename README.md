@@ -21,4 +21,4 @@
 
 # Screenshots of Website
 
-![main-screen](./assets/images/main.jpg "Screenshot of functioning weather app.")
+![main-screen](assets/images/main-screen.jpg "Screenshot of functioning weather app.")
