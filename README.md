@@ -2,6 +2,9 @@
 
 * This application allows you to search for the weather in any city.
 * The application uses data from the OpenWeather API 
+* Click link below to see deployed App
+
+https://laurencvengros.github.io/Weather_Dashboard/
 
 
 # Functionality 
@@ -19,6 +22,6 @@
 * IF you click the clear search button
   THEN your recent seqarches will be deleted.
 
-# Screenshots of Website
+# Screenshot of Website
 
 ![main-screen](assets/images/main-screen.jpg "Screenshot of functioning weather app.")
