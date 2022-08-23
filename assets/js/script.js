@@ -1,6 +1,7 @@
 var APIkey = "3ab800fa705dfe5653a465d8d9a9d6ae";
 var citiesLi = [];
 var city = "Austin";
+var typeUV = "";
 
 
 var tableBody = document.getElementById('list-of-cities');
@@ -79,6 +80,7 @@ function showCity(){
     var ulEl = document.createElement("ul");
     ulEl.classList.add("list-unstyled");
     ulEl.classList.add("w-100");
+    
 
     for(var i = 0; i < storedCities.length; i++){
        
@@ -88,6 +90,7 @@ function showCity(){
         
     }
         tableBody.appendChild(ulEl); 
+        
         
         
 };
@@ -121,15 +124,21 @@ fetch(APIurl)
 .then(function(data){
 uvIndex = data.value;
 
+console.log($("#uvIndex").hasClass('extreme'));
+
 
 if(uvIndex <= 2){
-   $("#todayforecast").addClass("low");
+   
+   typeUV = "low";
 }else if((uvIndex > 2) && (uvIndex <= 5)){
-    $("#todayforecast").addClass("moderate");
-}else if((uvIndex > 5) && (uvIndex <= 8)){
-    $("#todayforecast").addClass("high");
+    
+    typeUV = "moderate";
+}else if((uvIndex > 5) && (uvIndex <= 9)){
+   
+    typeUV = "high";
 }else if (uvIndex >=9){
-    $("#todayforecast").addClass("extreme");
+    
+    typeUV = "extreme";
 }
 
 showWeather();
@@ -234,9 +243,9 @@ function showWeather(){
     $("#todayforecast").append(weatherDiv);
     console.log(windSpeedEl);
     
-    var uvEl = $("<div>").text("UV Index: " + uvIndex)
+    var uvEl = $("<div class = '" + typeUV + "' id='uvIndex' >").text("UV Index: " + uvIndex)
     weatherDiv.append(uvEl);
-    $("#uvindex").append( weatherDiv );
+    $("#todayforecast").append( weatherDiv );
     console.log(uvEl);
 
     
